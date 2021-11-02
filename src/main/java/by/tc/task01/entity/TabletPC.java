@@ -4,6 +4,9 @@ import by.tc.task01.entity.characteristics.Color;
 
 import java.util.Objects;
 
+/**
+ * The type of tabletPC
+ */
 public class TabletPC extends Appliance{
     private int batteryCapacity;
     private double displayInches;
@@ -11,10 +14,23 @@ public class TabletPC extends Appliance{
     private int flashMemoryCapacity;
     private Color color;
 
+    /**
+     * Public parameterless constructor
+     */
     public TabletPC() {
     }
 
-    public TabletPC(String name, double price, int batteryCapacity, double displayInches, int memoryRom, int flashMemoryCapacity, Color color) {
+    /**
+     * @param name name field
+     * @param price price field
+     * @param batteryCapacity batteryCapacity field
+     * @param displayInches displayInches field
+     * @param memoryRom memoryRom field
+     * @param flashMemoryCapacity flashMemoryCapacity field
+     * @param color color field
+     */
+    public TabletPC(String name, double price, int batteryCapacity,
+                    double displayInches, int memoryRom, int flashMemoryCapacity, Color color) {
         super(name, price);
         this.batteryCapacity = batteryCapacity;
         this.displayInches = displayInches;
@@ -49,42 +65,72 @@ public class TabletPC extends Appliance{
                 '}';
     }
 
+    /**
+     * @return batteryCapacity of tabletPC
+     */
     public int getBatteryCapacity() {
         return batteryCapacity;
     }
 
+    /**
+     * @param batteryCapacity batteryCapacity to set
+     */
     public void setBatteryCapacity(int batteryCapacity) {
         this.batteryCapacity = batteryCapacity;
     }
 
+    /**
+     * @return displayInches of tabletPC
+     */
     public double getDisplayInches() {
         return displayInches;
     }
 
+    /**
+     * @param displayInches displayInches to set
+     */
     public void setDisplayInches(double displayInches) {
         this.displayInches = displayInches;
     }
 
+    /**
+     * @return memoryRom of tabletPC
+     */
     public int getMemoryRom() {
         return memoryRom;
     }
 
+    /**
+     * @param memoryRom memoryRom to set
+     */
     public void setMemoryRom(int memoryRom) {
         this.memoryRom = memoryRom;
     }
 
+    /**
+     * @return flashMemoryCapacity of tabletPC
+     */
     public int getFlashMemoryCapacity() {
         return flashMemoryCapacity;
     }
 
+    /**
+     * @param flashMemoryCapacity flashMemoryCapacity to set
+     */
     public void setFlashMemoryCapacity(int flashMemoryCapacity) {
         this.flashMemoryCapacity = flashMemoryCapacity;
     }
 
+    /**
+     * @return color of tabletPC
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * @param color color to set
+     */
     public void setColor(Color color) {
         this.color = color;
     }

@@ -12,21 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The type of DAO for xml files.
+ */
 public class ApplianceDAOImpl implements ApplianceDAO{
 
-	private static final String path = "src/main/resources/appliances.xml";
+	private static final String PATH = "src/main/resources/appliances.xml";
 
+	/**
+	 * Searches for appliances by criteria.
+	 *
+	 * @param criteria the criteria for search
+	 * @return list of found appliances in xml
+	 */
 	@Override
 	public List<Appliance> find(Criteria criteria) {
 		ArrayList<Appliance> products = new ArrayList<>();
 		Appliance product;
-		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.path)))) {
+		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.PATH)))) {
 			Set<String> properties = criteria.getCriteria().keySet();
 			do {
 				product = (Appliance) decoder.readObject();
 				boolean isSuit = true;
 				if (!criteria.getGroupSearchName().equals(product.getClass().getSimpleName())) {
-					isSuit = false;
+					continue;
 				}
 
 				for (String prop : properties) {
@@ -53,11 +62,16 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 		return products;
 	}
 
+	/**
+	 * Get all appliances.
+	 *
+	 * @return list of all appliances in xml file.
+	 */
 	@Override
 	public List<Appliance> getAll() {
 		ArrayList<Appliance> appliances = new ArrayList<>();
 		Appliance appliance;
-		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.path)))) {
+		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.PATH)))) {
 			do {
 				appliance = (Appliance) decoder.readObject();
 				appliances.add(appliance);
@@ -69,9 +83,14 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 		return appliances;
 	}
 
+	/**
+	 * Saves appliances into xml file.
+	 *
+	 * @param appliances list of appliances to save into db
+	 */
 	@Override
 	public void save(List<Appliance> appliances) {
-		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(ApplianceDAOImpl.path)))) {
+		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(ApplianceDAOImpl.PATH)))) {
 			for (Appliance appliance: appliances) {
 				encoder.writeObject(appliance);
 			}

@@ -2,17 +2,17 @@ package by.tc.task01.main;
 
 
 import by.tc.task01.entity.Appliance;
-import by.tc.task01.entity.characteristics.Color;
-import by.tc.task01.entity.characteristics.OS;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.SearchCriteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.ServiceFactory;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * The Main type
+ */
 public class Main {
 
 	/*
@@ -30,12 +30,16 @@ public class Main {
 	);
 	*/
 
+	/**
+	 * The entry point of the application.
+	 *
+	 * @param args arguments of command line
+	 */
 	public static void main(String[] args) {
 		List<Appliance> appliances;
 		ServiceFactory factory = ServiceFactory.getInstance();
 		ApplianceService service = factory.getApplianceService();
 		Criteria kettleCriteria = new Criteria(SearchCriteria.Kettle.getGroupName());
-		kettleCriteria.add("os", OS.MacOS);
 		appliances = service.find(kettleCriteria);
 		if (appliances == null) {
 			System.out.println("Invalid criteria");

@@ -8,8 +8,23 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * The type of criteria validator.
+ */
 public class Validator {
-	
+
+	/**
+	 * Private constructor.
+	 */
+	private Validator() {
+	}
+
+	/**
+	 * Checks if criteria is valid.
+	 *
+	 * @param criteria the criteria to validate
+	 * @return boolean if valid
+	 */
 	public static boolean criteriaValidator(Criteria criteria) {
 		return switch (criteria.getGroupSearchName()) {
 			case "Kettle" -> checkIfCriteriaExists(criteria, SearchCriteria.Kettle.values());
@@ -22,6 +37,13 @@ public class Validator {
 		};
 	}
 
+	/**
+	 * Check if criteria exists for given group.
+	 *
+	 * @param criteria the criteria to find
+	 * @param existingCriteria the existing criteria for given group
+	 * @return
+	 */
 	private static boolean checkIfCriteriaExists(Criteria criteria, ApplianceCriteria[] existingCriteria) {
 		Set<String> properties = criteria.getCriteria().keySet();
 		return properties.stream().allMatch(p -> Arrays.stream(existingCriteria)

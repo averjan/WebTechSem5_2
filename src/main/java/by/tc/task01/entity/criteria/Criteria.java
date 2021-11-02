@@ -9,22 +9,35 @@ public class Criteria {
 
 	private Map<String, Object> criteria = new HashMap<String, Object>();
 
+	/**
+	 * @return current criteria
+	 */
 	public Map<String, Object> getCriteria() {
 		return criteria;
 	}
 
+	/**
+	 * @param groupSearchName name for search group
+	 */
 	public Criteria(String groupSearchName) {
 		this.groupSearchName = groupSearchName;
 	}
-	
+
+	/**
+	 * @return group search name
+	 */
 	public String getGroupSearchName() {
 		return groupSearchName;
 	}
 
+	/**
+	 * Add criteria for search
+	 *
+	 * @param searchCriteria criteria to add
+	 * @param value value of criteria
+	 */
 	public void add(String searchCriteria, Object value) {
 		criteria.put(searchCriteria, value);
 	}
-	
-	// you may add your own code here
 
 }

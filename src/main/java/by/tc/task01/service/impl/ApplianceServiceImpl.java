@@ -13,8 +13,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The type of appliance xml service.
+ */
 public class ApplianceServiceImpl implements ApplianceService{
 
+	/**
+	 * Searches for appliances by criteria.
+	 *
+	 * @param criteria the criteria for search
+	 * @return list of found appliances
+	 */
 	@Override
 	public List<Appliance> find(Criteria criteria) {
 		if (!Validator.criteriaValidator(criteria)) {
@@ -27,6 +36,12 @@ public class ApplianceServiceImpl implements ApplianceService{
 		return applianceDAO.find(criteria);
 	}
 
+	/**
+	 * Gets sorted by comparator appliances.
+	 *
+	 * @param comparator for sorting appliances
+	 * @return list of sorted by comparator appliances
+	 */
 	@Override
 	public List<Appliance> getSorted(Comparator<Appliance> comparator) {
 		DAOFactory factory = DAOFactory.getInstance();
@@ -35,6 +50,12 @@ public class ApplianceServiceImpl implements ApplianceService{
 		return appliances;
 	}
 
+	/**
+	 * Gets minimal appliances by criteria.
+	 *
+	 * @param comparator defines minimal value criteria
+	 * @return list of appliances with minimal criteria defined by comparator
+	 */
 	@Override
 	public List<Appliance> getMin(Comparator<Appliance> comparator) {
 		DAOFactory factory = DAOFactory.getInstance();
@@ -50,6 +71,11 @@ public class ApplianceServiceImpl implements ApplianceService{
 		return new ArrayList<>();
 	}
 
+	/**
+	 * Appends appliances to xml file.
+	 *
+	 * @param appliances the list of appliances to add to model
+	 */
 	@Override
 	public void save(List<Appliance> appliances) {
 		DAOFactory factory = DAOFactory.getInstance();
