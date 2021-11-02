@@ -7,10 +7,13 @@ import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.validation.Validator;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class ApplianceServiceImpl implements ApplianceService{
 
 	@Override
-	public Appliance find(Criteria criteria) {
+	public List<Appliance> find(Criteria criteria) {
 		if (!Validator.criteriaValidator(criteria)) {
 			return null;
 		}
@@ -18,13 +21,19 @@ public class ApplianceServiceImpl implements ApplianceService{
 		DAOFactory factory = DAOFactory.getInstance();
 		ApplianceDAO applianceDAO = factory.getApplianceDAO();
 		
-		Appliance appliance = applianceDAO.find(criteria);
-		
-		// you may add your own code here
-		
-		return appliance;
+		return applianceDAO.find(criteria);
+	}
+
+	@Override
+	public List<Appliance> getSorted(Comparator<Appliance> comparator) {
+		DAOFactory factory = DAOFactory.getInstance();
+		return factory.getApplianceDAO().getAll();
+	}
+
+	@Override
+	public void save(List<Appliance> appliances) {
+		DAOFactory factory = DAOFactory.getInstance();
+		factory.getApplianceDAO().save(appliances);
 	}
 
 }
-
-//you may add your own new classes

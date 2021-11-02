@@ -2,13 +2,17 @@ package by.tc.task01.main;
 
 import by.tc.task01.entity.Appliance;
 
+import java.util.List;
+
 public class PrintApplianceInfo {
-	
-	public static void print(Appliance appliance) {
-		// you may add your own code here
-		
+
+	private PrintApplianceInfo() {
 	}
-	
-	// you may add your own code here
+
+	public static void print(List<Appliance> appliances) {
+		for (Appliance appliance : appliances) {
+			System.out.println(appliance);
+		}
+	}
 
 }
