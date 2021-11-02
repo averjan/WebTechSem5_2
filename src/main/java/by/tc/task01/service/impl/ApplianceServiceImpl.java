@@ -7,8 +7,11 @@ import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.service.ApplianceService;
 import by.tc.task01.service.validation.Validator;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ApplianceServiceImpl implements ApplianceService{
 
@@ -27,7 +30,24 @@ public class ApplianceServiceImpl implements ApplianceService{
 	@Override
 	public List<Appliance> getSorted(Comparator<Appliance> comparator) {
 		DAOFactory factory = DAOFactory.getInstance();
-		return factory.getApplianceDAO().getAll();
+		List<Appliance> appliances = factory.getApplianceDAO().getAll();
+		appliances.sort(comparator);
+		return appliances;
+	}
+
+	@Override
+	public List<Appliance> getMin(Comparator<Appliance> comparator) {
+		DAOFactory factory = DAOFactory.getInstance();
+		List<Appliance> appliances = factory.getApplianceDAO().getAll();
+		Optional<Appliance> mins = appliances.stream().min(comparator);
+		Appliance min = mins.orElse(null);
+		if (min != null) {
+			return appliances.stream().filter(
+					p -> comparator.compare(p, min) == 0)
+					.collect(Collectors.toList());
+		}
+
+		return new ArrayList<>();
 	}
 
 	@Override

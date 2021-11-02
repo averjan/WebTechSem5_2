@@ -8,9 +8,9 @@ public class Laptop extends Appliance{
     private int batteryCapacity;
     private int memoryRom;
     private int systemMemory;
-    private float CPU;
+    private float cpu;
     private int displayInches;
-    private OS operatingSystem;
+    private OS os;
 
     public Laptop() {
     }
@@ -20,9 +20,9 @@ public class Laptop extends Appliance{
         this.batteryCapacity = batteryCapacity;
         this.memoryRom = memoryRom;
         this.systemMemory = systemMemory;
-        this.CPU = CPU;
+        this.cpu = CPU;
         this.displayInches = displayInches;
-        this.operatingSystem = operatingSystem;
+        this.os = operatingSystem;
     }
 
     @Override
@@ -30,12 +30,12 @@ public class Laptop extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Laptop laptop = (Laptop) o;
-        return laptop.name.equals(name) && laptop.price == price && batteryCapacity == laptop.batteryCapacity && memoryRom == laptop.memoryRom && systemMemory == laptop.systemMemory && Float.compare(laptop.CPU, CPU) == 0 && displayInches == laptop.displayInches && operatingSystem == laptop.operatingSystem;
+        return laptop.name.equals(name) && laptop.price == price && batteryCapacity == laptop.batteryCapacity && memoryRom == laptop.memoryRom && systemMemory == laptop.systemMemory && Float.compare(laptop.cpu, cpu) == 0 && displayInches == laptop.displayInches && os == laptop.os;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(batteryCapacity, memoryRom, systemMemory, CPU, displayInches, operatingSystem);
+        return Objects.hash(batteryCapacity, memoryRom, systemMemory, cpu, displayInches, os);
     }
 
     @Override
@@ -46,9 +46,9 @@ public class Laptop extends Appliance{
                 ", batteryCapacity=" + batteryCapacity +
                 ", memoryRom=" + memoryRom +
                 ", systemMemory=" + systemMemory +
-                ", CPU=" + CPU +
+                ", CPU=" + cpu +
                 ", displayInches=" + displayInches +
-                ", operatingSystem=" + operatingSystem +
+                ", operatingSystem=" + os +
                 '}';
     }
 
@@ -76,12 +76,12 @@ public class Laptop extends Appliance{
         this.systemMemory = systemMemory;
     }
 
-    public float getCPU() {
-        return CPU;
+    public float getCpu() {
+        return cpu;
     }
 
-    public void setCPU(float CPU) {
-        this.CPU = CPU;
+    public void setCpu(float cpu) {
+        this.cpu = cpu;
     }
 
     public int getDisplayInches() {
@@ -92,11 +92,11 @@ public class Laptop extends Appliance{
         this.displayInches = displayInches;
     }
 
-    public OS getOperatingSystem() {
-        return operatingSystem;
+    public OS getOs() {
+        return os;
     }
 
-    public void setOperatingSystem(OS operatingSystem) {
-        this.operatingSystem = operatingSystem;
+    public void setOs(OS os) {
+        this.os = os;
     }
 }

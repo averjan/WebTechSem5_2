@@ -3,6 +3,7 @@ package by.tc.task01.main;
 
 import by.tc.task01.entity.Appliance;
 import by.tc.task01.entity.characteristics.Color;
+import by.tc.task01.entity.characteristics.OS;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.SearchCriteria;
 import by.tc.task01.service.ApplianceService;
@@ -34,12 +35,19 @@ public class Main {
 		ServiceFactory factory = ServiceFactory.getInstance();
 		ApplianceService service = factory.getApplianceService();
 		Criteria kettleCriteria = new Criteria(SearchCriteria.Kettle.getGroupName());
+		kettleCriteria.add("os", OS.MacOS);
 		appliances = service.find(kettleCriteria);
-		System.out.println("Teapots founded: ");
-		PrintApplianceInfo.print(appliances);
+		if (appliances == null) {
+			System.out.println("Invalid criteria");
+		}
+		else {
+			System.out.println("All kettles: ");
+			PrintApplianceInfo.print(appliances);
+		}
+
 		System.out.println();
-		appliances = service.getSorted(Comparator.comparing(Appliance::getPrice));
-		System.out.println("Appliances with minimal cost: ");
+		appliances = service.getMin(Comparator.comparing(Appliance::getPrice));
+		System.out.println("Appliances with minimal price: ");
 		PrintApplianceInfo.print(appliances);
 	}
 

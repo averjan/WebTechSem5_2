@@ -1,7 +1,7 @@
 package by.tc.task01.dao.impl;
 
 import by.tc.task01.dao.ApplianceDAO;
-import by.tc.task01.entity.Appliance;
+import by.tc.task01.entity.*;
 import by.tc.task01.entity.criteria.Criteria;
 
 import java.beans.XMLDecoder;
@@ -21,12 +21,16 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 		ArrayList<Appliance> products = new ArrayList<>();
 		Appliance product;
 		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.path)))) {
+			Set<String> properties = criteria.getCriteria().keySet();
 			do {
 				product = (Appliance) decoder.readObject();
-				Set<String> properties = criteria.getCriteria().keySet();
 				boolean isSuit = true;
+				if (!criteria.getGroupSearchName().equals(product.getClass().getSimpleName())) {
+					isSuit = false;
+				}
+
 				for (String prop : properties) {
-					Field field = product.getClass().getField(prop);
+					Field field = product.getClass().getDeclaredField(prop);
 					field.setAccessible(true);
 					Object fieldValue = field.get(product);
 					if (!fieldValue.equals(criteria.getCriteria().get(prop))) {

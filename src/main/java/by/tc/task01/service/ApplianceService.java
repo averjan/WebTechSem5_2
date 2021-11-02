@@ -12,5 +12,7 @@ public interface ApplianceService {
 
 	List<Appliance> getSorted(Comparator<Appliance> comparator);
 
+	List<Appliance> getMin(Comparator<Appliance> comparator);
+
 	void save(List<Appliance> appliances);
 }
