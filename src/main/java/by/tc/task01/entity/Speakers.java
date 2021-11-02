@@ -25,7 +25,9 @@ public class Speakers extends Appliance{
      * @param frequencyRange frequencyRange field
      * @param cordLength cordLength field
      */
-    public Speakers(String name, double price, int powerConsumption, int numberOfSpeakers, int frequencyRange, int cordLength) {
+    public Speakers(String name, double price, int powerConsumption,
+                    int numberOfSpeakers, int frequencyRange,
+                    int cordLength) {
         super(name, price);
         this.powerConsumption = powerConsumption;
         this.numberOfSpeakers = numberOfSpeakers;
@@ -38,7 +40,11 @@ public class Speakers extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Speakers speakers = (Speakers) o;
-        return name.equals(speakers.name) && price == speakers.price && powerConsumption == speakers.powerConsumption && numberOfSpeakers == speakers.numberOfSpeakers && frequencyRange == speakers.frequencyRange && cordLength == speakers.cordLength;
+        return name.equals(speakers.name) && price == speakers.price
+                && powerConsumption == speakers.powerConsumption
+                && numberOfSpeakers == speakers.numberOfSpeakers
+                && frequencyRange == speakers.frequencyRange
+                && cordLength == speakers.cordLength;
     }
 
     @Override

@@ -23,7 +23,8 @@ public class VacuumCleaner extends Appliance{
      * @param motorSpeedRegulation motorSpeedRegulation field
      * @param cleaningWidth cleaningWidth field
      */
-    public VacuumCleaner(String name, double price, int powerConsumption, int motorSpeedRegulation, int cleaningWidth) {
+    public VacuumCleaner(String name, double price, int powerConsumption,
+                         int motorSpeedRegulation, int cleaningWidth) {
         super(name, price);
         this.powerConsumption = powerConsumption;
         this.motorSpeedRegulation = motorSpeedRegulation;
@@ -35,7 +36,10 @@ public class VacuumCleaner extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VacuumCleaner that = (VacuumCleaner) o;
-        return name.equals(that.name) && price == that.price && powerConsumption == that.powerConsumption && motorSpeedRegulation == that.motorSpeedRegulation && cleaningWidth == that.cleaningWidth;
+        return name.equals(that.name) && price == that.price
+                && powerConsumption == that.powerConsumption
+                && motorSpeedRegulation == that.motorSpeedRegulation
+                && cleaningWidth == that.cleaningWidth;
     }
 
     @Override

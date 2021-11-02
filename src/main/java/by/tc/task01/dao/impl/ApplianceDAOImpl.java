@@ -29,34 +29,25 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 	public List<Appliance> find(Criteria criteria) {
 		ArrayList<Appliance> products = new ArrayList<>();
 		Appliance product;
-		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.PATH)))) {
-			Set<String> properties = criteria.getCriteria().keySet();
+
+		try (XMLDecoder decoder = new XMLDecoder(
+				new BufferedInputStream(
+						new FileInputStream(ApplianceDAOImpl.PATH)))) {
+
 			do {
 				product = (Appliance) decoder.readObject();
-				boolean isSuit = true;
-				if (!criteria.getGroupSearchName().equals(product.getClass().getSimpleName())) {
-					continue;
-				}
 
-				for (String prop : properties) {
-					Field field = product.getClass().getDeclaredField(prop);
-					field.setAccessible(true);
-					Object fieldValue = field.get(product);
-					if (!fieldValue.equals(criteria.getCriteria().get(prop))) {
-						isSuit = false;
-						break;
-					}
-				}
-
-				if (isSuit) {
+				if (this.hasProperties(product, criteria)) {
 					products.add(product);
 				}
 
 			} while (product != null);
 		} catch (ArrayIndexOutOfBoundsException e) {
+			// End of file.
 		} catch (FileNotFoundException e) {
-		} catch (NoSuchFieldException e) {
-		} catch (IllegalAccessException e) {
+			System.out.printf("Error trying read XML: %s%n", e.getMessage());
+		} catch (NoSuchFieldException | IllegalAccessException e) {
+			System.out.printf("Error trying get appliance field: %s%n", e.getMessage());
 		}
 
 		return products;
@@ -71,13 +62,17 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 	public List<Appliance> getAll() {
 		ArrayList<Appliance> appliances = new ArrayList<>();
 		Appliance appliance;
-		try (XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(ApplianceDAOImpl.PATH)))) {
+		try (XMLDecoder decoder = new XMLDecoder(
+				new BufferedInputStream(
+						new FileInputStream(ApplianceDAOImpl.PATH)))) {
 			do {
 				appliance = (Appliance) decoder.readObject();
 				appliances.add(appliance);
 			} while (appliance != null);
 		} catch (ArrayIndexOutOfBoundsException e) {
+			// End of file.
 		} catch (FileNotFoundException e) {
+			System.out.printf("Error trying read XML: %s%n", e.getMessage());
 		}
 
 		return appliances;
@@ -90,7 +85,9 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 	 */
 	@Override
 	public void save(List<Appliance> appliances) {
-		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(ApplianceDAOImpl.PATH)))) {
+		try (XMLEncoder encoder = new XMLEncoder(
+				new BufferedOutputStream(
+						new FileOutputStream(ApplianceDAOImpl.PATH)))) {
 			for (Appliance appliance: appliances) {
 				encoder.writeObject(appliance);
 			}
@@ -98,5 +95,36 @@ public class ApplianceDAOImpl implements ApplianceDAO{
 		} catch (ArrayIndexOutOfBoundsException e) {
 		} catch (FileNotFoundException e) {
 		}
+	}
+
+	/**
+	 * Check if appliance has criteria.
+	 *
+	 * @param appliance appliance to check
+	 * @param criteria criteria to find
+	 * @return true if has such properties as criteria
+	 * @throws NoSuchFieldException if appliance has no such criteria
+	 * @throws IllegalAccessException if access to appliance field is closed
+	 */
+	private boolean hasProperties(Appliance appliance, Criteria criteria)
+			throws NoSuchFieldException,IllegalAccessException {
+
+		if (!criteria.getGroupSearchName()
+				.equals(appliance.getClass().getSimpleName())) {
+			return false;
+		}
+
+		Set<String> properties = criteria.getCriteria().keySet();
+		for (String prop : properties) {
+			Object fieldValue;
+			Field field = appliance.getClass().getDeclaredField(prop);
+			field.setAccessible(true);
+			fieldValue = field.get(appliance);
+			if (!fieldValue.equals(criteria.getCriteria().get(prop))) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

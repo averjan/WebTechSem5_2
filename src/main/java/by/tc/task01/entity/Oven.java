@@ -45,7 +45,11 @@ public class Oven extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Oven oven = (Oven) o;
-        return name.equals(oven.name) && price == oven.price && powerConsumption == oven.powerConsumption && weight == oven.weight && capacity == oven.capacity && depth == oven.depth && height == oven.height && width == oven.width;
+        return name.equals(oven.name) && price == oven.price
+                && powerConsumption == oven.powerConsumption
+                && weight == oven.weight && capacity == oven.capacity
+                && depth == oven.depth && height == oven.height
+                && width == oven.width;
     }
 
     @Override

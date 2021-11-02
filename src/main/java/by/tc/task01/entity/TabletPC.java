@@ -30,7 +30,8 @@ public class TabletPC extends Appliance{
      * @param color color field
      */
     public TabletPC(String name, double price, int batteryCapacity,
-                    double displayInches, int memoryRom, int flashMemoryCapacity, Color color) {
+                    double displayInches, int memoryRom,
+                    int flashMemoryCapacity, Color color) {
         super(name, price);
         this.batteryCapacity = batteryCapacity;
         this.displayInches = displayInches;
@@ -44,12 +45,18 @@ public class TabletPC extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TabletPC tabletPC = (TabletPC) o;
-        return name.equals(tabletPC.name) && price == tabletPC.price && batteryCapacity == tabletPC.batteryCapacity && displayInches == tabletPC.displayInches && memoryRom == tabletPC.memoryRom && flashMemoryCapacity == tabletPC.flashMemoryCapacity && color == tabletPC.color;
+        return name.equals(tabletPC.name) && price == tabletPC.price
+                && batteryCapacity == tabletPC.batteryCapacity
+                && displayInches == tabletPC.displayInches
+                && memoryRom == tabletPC.memoryRom
+                && flashMemoryCapacity == tabletPC.flashMemoryCapacity
+                && color == tabletPC.color;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(batteryCapacity, displayInches, memoryRom, flashMemoryCapacity, color);
+        return Objects.hash(batteryCapacity, displayInches,
+                memoryRom, flashMemoryCapacity, color);
     }
 
     @Override

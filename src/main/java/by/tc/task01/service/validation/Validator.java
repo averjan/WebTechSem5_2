@@ -27,12 +27,18 @@ public class Validator {
 	 */
 	public static boolean criteriaValidator(Criteria criteria) {
 		return switch (criteria.getGroupSearchName()) {
-			case "Kettle" -> checkIfCriteriaExists(criteria, SearchCriteria.Kettle.values());
-			case "Laptop" -> checkIfCriteriaExists(criteria, SearchCriteria.Laptop.values());
-			case "Oven" -> checkIfCriteriaExists(criteria, SearchCriteria.Oven.values());
-			case "Refrigerator" -> checkIfCriteriaExists(criteria, SearchCriteria.Refrigerator.values());
-			case "Speakers" -> checkIfCriteriaExists(criteria, SearchCriteria.Speakers.values());
-			case "TabletPC" -> checkIfCriteriaExists(criteria, SearchCriteria.TabletPC.values());
+			case "Kettle" -> checkIfCriteriaExists(criteria,
+					SearchCriteria.Kettle.values());
+			case "Laptop" -> checkIfCriteriaExists(criteria,
+					SearchCriteria.Laptop.values());
+			case "Oven" -> checkIfCriteriaExists(criteria,
+					SearchCriteria.Oven.values());
+			case "Refrigerator" -> checkIfCriteriaExists(criteria,
+					SearchCriteria.Refrigerator.values());
+			case "Speakers" -> checkIfCriteriaExists(criteria,
+					SearchCriteria.Speakers.values());
+			case "TabletPC" -> checkIfCriteriaExists(criteria,
+					SearchCriteria.TabletPC.values());
 			default -> false;
 		};
 	}
@@ -44,7 +50,9 @@ public class Validator {
 	 * @param existingCriteria the existing criteria for given group
 	 * @return
 	 */
-	private static boolean checkIfCriteriaExists(Criteria criteria, ApplianceCriteria[] existingCriteria) {
+	private static boolean checkIfCriteriaExists(
+			Criteria criteria,
+			ApplianceCriteria[] existingCriteria) {
 		Set<String> properties = criteria.getCriteria().keySet();
 		return properties.stream().allMatch(p -> Arrays.stream(existingCriteria)
 				.anyMatch(e -> Objects.equals(e.getName(), p)));

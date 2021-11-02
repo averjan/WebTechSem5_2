@@ -2,6 +2,7 @@ package by.tc.task01.main;
 
 
 import by.tc.task01.entity.Appliance;
+import by.tc.task01.entity.characteristics.Color;
 import by.tc.task01.entity.criteria.Criteria;
 import by.tc.task01.entity.criteria.SearchCriteria;
 import by.tc.task01.service.ApplianceService;
@@ -41,10 +42,7 @@ public class Main {
 		ApplianceService service = factory.getApplianceService();
 		Criteria kettleCriteria = new Criteria(SearchCriteria.Kettle.getGroupName());
 		appliances = service.find(kettleCriteria);
-		if (appliances == null) {
-			System.out.println("Invalid criteria");
-		}
-		else {
+		if (appliances != null) {
 			System.out.println("All kettles: ");
 			PrintApplianceInfo.print(appliances);
 		}

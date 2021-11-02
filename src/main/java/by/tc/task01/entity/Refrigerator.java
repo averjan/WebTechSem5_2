@@ -45,12 +45,18 @@ public class Refrigerator extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Refrigerator that = (Refrigerator) o;
-        return name.equals(that.name) && price == that.price && powerConsumption == that.powerConsumption && weight == that.weight && freezerCapacity == that.freezerCapacity && overallCapacity == that.overallCapacity && height == that.height && width == that.width;
+        return name.equals(that.name) && price == that.price
+                && powerConsumption == that.powerConsumption
+                && weight == that.weight
+                && freezerCapacity == that.freezerCapacity
+                && overallCapacity == that.overallCapacity
+                && height == that.height && width == that.width;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(powerConsumption, weight, freezerCapacity, overallCapacity, height, width);
+        return Objects.hash(powerConsumption, weight, freezerCapacity,
+                overallCapacity, height, width);
     }
 
     @Override

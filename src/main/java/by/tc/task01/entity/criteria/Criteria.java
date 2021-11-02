@@ -10,17 +10,17 @@ public class Criteria {
 	private Map<String, Object> criteria = new HashMap<String, Object>();
 
 	/**
-	 * @return current criteria
-	 */
-	public Map<String, Object> getCriteria() {
-		return criteria;
-	}
-
-	/**
 	 * @param groupSearchName name for search group
 	 */
 	public Criteria(String groupSearchName) {
 		this.groupSearchName = groupSearchName;
+	}
+
+	/**
+	 * @return current criteria
+	 */
+	public Map<String, Object> getCriteria() {
+		return criteria;
 	}
 
 	/**

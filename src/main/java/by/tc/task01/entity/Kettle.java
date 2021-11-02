@@ -25,7 +25,8 @@ public class Kettle extends Appliance {
      * @param waterCapacity waterCapacity field
      * @param color color field
      */
-    public Kettle(String name, double price, int powerConsumption, double waterCapacity, Color color) {
+    public Kettle(String name, double price, int powerConsumption,
+                  double waterCapacity, Color color) {
         super(name, price);
         this.powerConsumption = powerConsumption;
         this.waterCapacity = waterCapacity;
@@ -37,7 +38,10 @@ public class Kettle extends Appliance {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Kettle kettle = (Kettle) o;
-        return name.equals(kettle.name) && price == kettle.price && powerConsumption == kettle.powerConsumption && Double.compare(kettle.waterCapacity, waterCapacity) == 0 && color == kettle.color;
+        return name.equals(kettle.name) && price == kettle.price
+                && powerConsumption == kettle.powerConsumption
+                && Double.compare(kettle.waterCapacity, waterCapacity) == 0
+                && color == kettle.color;
     }
 
     @Override

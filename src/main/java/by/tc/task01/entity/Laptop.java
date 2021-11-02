@@ -31,7 +31,9 @@ public class Laptop extends Appliance{
      * @param displayInches displayInches field
      * @param operatingSystem os field
      */
-    public Laptop(String name, double price, int batteryCapacity, int memoryRom, int systemMemory, float CPU, int displayInches, OS operatingSystem) {
+    public Laptop(String name, double price, int batteryCapacity,
+                  int memoryRom, int systemMemory, float CPU,
+                  int displayInches, OS operatingSystem) {
         super(name, price);
         this.batteryCapacity = batteryCapacity;
         this.memoryRom = memoryRom;
@@ -46,7 +48,12 @@ public class Laptop extends Appliance{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Laptop laptop = (Laptop) o;
-        return laptop.name.equals(name) && laptop.price == price && batteryCapacity == laptop.batteryCapacity && memoryRom == laptop.memoryRom && systemMemory == laptop.systemMemory && Float.compare(laptop.cpu, cpu) == 0 && displayInches == laptop.displayInches && os == laptop.os;
+        return laptop.name.equals(name) && laptop.price == price
+                && batteryCapacity == laptop.batteryCapacity
+                && memoryRom == laptop.memoryRom
+                && systemMemory == laptop.systemMemory
+                && Float.compare(laptop.cpu, cpu) == 0
+                && displayInches == laptop.displayInches && os == laptop.os;
     }
 
     @Override
